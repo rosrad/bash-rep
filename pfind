@@ -1,0 +1,15 @@
+#!/bin/bash -u
+#set -x 
+#echo ${*:1:2}
+_script="$(readlink -f ${BASH_SOURCE[0]})"
+cur_dir=$(dirname $_script)
+source ${cur_dir}/color.sh
+for path in `echo $1 |awk 'BEGIN{RS=":"}{print $1}'`
+do
+#echo "finding in ${path}"
+#echo -en "${COL_RED}finding in ${path}\n${COL_RESET}"
+
+#set -x
+    find $path "${@:2}"
+#set +x
+done

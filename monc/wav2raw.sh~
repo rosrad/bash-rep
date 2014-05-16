@@ -1,0 +1,19 @@
+#!/bin/bash
+
+dir=`readlink -e $1`
+clip=$2
+echo clip: $clip 
+echo $dir
+
+for file in `ls ${dir}|egrep ".*.wav$"`
+do
+    echo "wavefile $file"
+    base=`echo $file | cut -d'.' -f 1`
+    out=$dir/$base.raw
+    echo $out
+    trim=$dir/${base}.trm.wav
+    echo trim =  $trim
+    sox $file $trim trim $clip
+    sox --encoding signed-integer --bits 16 --rate 16k --endian little --channels 1 $trim $out
+    
+done

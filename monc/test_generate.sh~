@@ -1,0 +1,8 @@
+#!/bin/bash
+$indir=$1
+
+
+for file in `ls $indir|egrep *\.list$`
+do
+    echo "generate test of list :" $file
+    for line in `cat $file`
