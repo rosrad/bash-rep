@@ -17,14 +17,12 @@ function format_mail() {
     fi
     #actually send the mail and attach log file
     base=`basename ${attach}`
-    now=`date +%Y%m%d-%H:%M:%S`
     #echo "base is ${base}"
-    sub_base=`expr substr $base 1 5`
-    #echo "sub_base is ${sub_base}"
-    subject="[Experiment]${now}==${sub_base}..."
+    subject="[Experiment]${base}"
     echo "Send Mail with Subject : ${subject} "
     echo $body | mail -s "$subject" -a "$attach" "${to_mail}" < $body
 }
+
 function send_mail() {
     files=$sender/*.mail
     for file in $files; do
