@@ -23,9 +23,7 @@ function format_mail() {
     #echo "sub_base is ${sub_base}"
     subject="[Experiment]${now}==${sub_base}..."
     echo "Send Mail with Subject : ${subject} "
-    set -x
     echo $body | mail -s "$subject" -a "$attach" "${to_mail}" < $body
-    set +x
 }
 function send_mail() {
     files=$sender/*.mail
